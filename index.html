@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Space Insulation | Home Insulation & Energy Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,700;1,700;1,800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#83b735',
+              secondary: '#202e31',
+              accent: '#f29c1f'
+            },
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+              heading: ['Raleway', 'sans-serif']
+            },
+            animation: {
+              'fade-up': 'fadeUp 0.8s ease-out forwards',
+              'fade-in': 'fadeIn 1.2s ease-out forwards',
+              'float': 'float 6s ease-in-out infinite',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Progress Bar Specific Reveal */
+      .reveal-grow {
+        width: 0 !important;
+        transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s, opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .reveal-grow.active {
+        width: var(--target-width) !important;
+      }
+
+      .backdrop-blur-header {
+        backdrop-filter: blur(12px);
+        background-color: rgba(32, 46, 49, 0.85);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .text-shadow-lg {
+        text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      }
+      .animation-delay-200 { animation-delay: 200ms; }
+      .animation-delay-400 { animation-delay: 400ms; }
+      .fill-mode-forwards { animation-fill-mode: forwards; }
+      html { scroll-behavior: smooth; }
+      
+      /* Mobile optimization for long words */
+      h1, h2 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+<body class="bg-white text-gray-800 font-sans selection:bg-primary selection:text-white overflow-x-hidden">
+    <div id="root" class="overflow-x-hidden"></div>
+    <script>
+      // Scroll Reveal Observer
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, observerOptions);
+
+      // Periodically check for new elements (for React hydration)
+      setInterval(() => {
+        document.querySelectorAll('.reveal:not(.active), .reveal-grow:not(.active)').forEach(el => observer.observe(el));
+      }, 500);
+    </script>
+</body>
+</html>
