@@ -1,0 +1,16 @@
+/*
+Theme Name: Space Insulation
+Theme URI: https://spaceinsulation.ca
+Author: Space Insulation
+Author URI: https://spaceinsulation.ca
+Description: Custom WordPress theme for Space Insulation
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: space-insulation
+*/
+
+/* 
+ * This theme uses Tailwind CSS loaded via CDN for design fidelity.
+ * Custom styles are handled in the head or via specific CSS classes.
+ */
