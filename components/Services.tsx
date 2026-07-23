@@ -34,6 +34,13 @@ const SERVICES_DATA = [
     icon: <Trash2 className="text-white" size={32} />,
     image: 'https://i.ibb.co/ccNxS2r0/Gemini-Generated-Image-gnnvdmgnnvdmgnnv.png',
     badge: 'ESSENTIAL'
+  },
+  {
+    title: 'Attic Insulation & Upgrades',
+    description: 'Bring your home up to code. We provide full-scope upgrades: thorough assessments, old insulation removal, air sealing, and R-60 installation.',
+    icon: <ShieldCheck className="text-white" size={32} />,
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2000',
+    badge: 'COMPLETE'
   }
 ];
 
@@ -59,8 +66,8 @@ const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
           </p>
         </div>
 
-        {/* Main Service Cards Grid (2x2 on LG screens) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {/* Main Service Cards Grid (3 Columns on LG screens) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {SERVICES_DATA.map((service, i) => (
             <div 
               key={i} 
@@ -85,12 +92,30 @@ const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
                 <p className="text-white/70 text-base max-w-md mb-8 leading-relaxed">
                   {service.description}
                 </p>
-                <button 
-                   onClick={handleEstimateClick}
-                   className="bg-white text-secondary px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-2xl active:scale-95"
-                >
-                  Book Free Estimate
-                </button>
+                <div className="flex flex-wrap gap-4">
+                  {service.title === 'Blown-In Insulation' && onNavigate && (
+                    <button 
+                       onClick={() => onNavigate('services/blown-in-insulation')}
+                       className="bg-primary text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary/80 transition-all shadow-2xl active:scale-95 hover:scale-105"
+                    >
+                      Learn More
+                    </button>
+                  )}
+                  {service.title === 'Attic Insulation & Upgrades' && onNavigate && (
+                    <button 
+                       onClick={() => onNavigate('services/attic-insulation-upgrades')}
+                       className="bg-primary text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary/80 transition-all shadow-2xl active:scale-95 hover:scale-105"
+                    >
+                      Learn More
+                    </button>
+                  )}
+                  <button 
+                     onClick={handleEstimateClick}
+                     className="bg-white text-secondary px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-2xl active:scale-95 hover:scale-105"
+                  >
+                    Book Free Estimate
+                  </button>
+                </div>
               </div>
               <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest">
                 {service.badge}

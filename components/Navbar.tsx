@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import { PageID } from '../App';
 
@@ -57,16 +57,54 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </div>
 
           <nav className="hidden lg:flex items-center space-x-10">
-            {navItems.map((item) => (
-              <a 
-                key={item.label}
-                href={`#${item.id}`} 
-                onClick={(e) => handleLinkClick(e, item.id)}
-                className={`text-sm uppercase font-bold tracking-widest transition-colors ${currentPage === item.id ? 'text-primary' : 'text-white hover:text-primary'}`}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              if (item.id === 'services') {
+                return (
+                  <div key={item.label} className="relative group py-4">
+                    <button 
+                      onClick={(e) => handleLinkClick(e, 'services')}
+                      className={`text-sm uppercase font-bold tracking-widest transition-colors flex items-center gap-1 ${currentPage.startsWith('services') ? 'text-primary' : 'text-white hover:text-primary'}`}
+                    >
+                      {item.label}
+                      <ChevronDown size={14} className="transition-transform group-hover:rotate-180" />
+                    </button>
+                    <div className="absolute top-full left-0 mt-1 w-64 bg-secondary border border-white/10 rounded-2xl shadow-2xl py-2 hidden group-hover:block transition-all duration-300 backdrop-blur-header bg-opacity-95">
+                      <a 
+                        href="#services" 
+                        onClick={(e) => handleLinkClick(e, 'services')}
+                        className={`block px-6 py-3 text-xs uppercase font-bold tracking-wider hover:text-primary ${currentPage === 'services' ? 'text-primary' : 'text-white/70'}`}
+                      >
+                        All Services
+                      </a>
+                      <a 
+                        href="#services/blown-in-insulation" 
+                        onClick={(e) => handleLinkClick(e, 'services/blown-in-insulation')}
+                        className={`block px-6 py-3 text-xs uppercase font-bold tracking-wider hover:text-primary border-t border-white/5 ${currentPage === 'services/blown-in-insulation' ? 'text-primary' : 'text-white/70'}`}
+                      >
+                        Blown-In Insulation
+                      </a>
+                      <a 
+                        href="#services/attic-insulation-upgrades" 
+                        onClick={(e) => handleLinkClick(e, 'services/attic-insulation-upgrades')}
+                        className={`block px-6 py-3 text-xs uppercase font-bold tracking-wider hover:text-primary border-t border-white/5 ${currentPage === 'services/attic-insulation-upgrades' ? 'text-primary' : 'text-white/70'}`}
+                      >
+                        Attic Insulation & Upgrades
+                      </a>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <a 
+                  key={item.label}
+                  href={`#${item.id}`} 
+                  onClick={(e) => handleLinkClick(e, item.id)}
+                  className={`text-sm uppercase font-bold tracking-widest transition-colors ${currentPage === item.id ? 'text-primary' : 'text-white hover:text-primary'}`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </nav>
 
           <div className="flex items-center space-x-4">
@@ -90,18 +128,56 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
              <X size={32} />
            </button>
         </div>
-        <nav className="flex flex-col p-12 space-y-8 h-[calc(100%-80px)] justify-center">
-          {navItems.map((item) => (
-            <a 
-              key={item.label}
-              href={`#${item.id}`} 
-              onClick={(e) => handleLinkClick(e, item.id)}
-              className={`text-4xl font-black italic transition-colors ${currentPage === item.id ? 'text-primary' : 'text-white hover:text-primary'}`}
-            >
-              {item.label}
-            </a>
-          ))}
-          <a href="tel:6477049021" className="bg-primary text-white py-6 rounded-3xl text-center text-2xl font-black uppercase tracking-widest">Call Now</a>
+        <nav className="flex flex-col p-12 space-y-6 h-[calc(100%-80px)] justify-center overflow-y-auto">
+          {navItems.map((item) => {
+            if (item.id === 'services') {
+              return (
+                <div key={item.label} className="flex flex-col space-y-4">
+                  <a 
+                    href={`#${item.id}`} 
+                    onClick={(e) => handleLinkClick(e, 'services')}
+                    className={`text-4xl font-black italic transition-colors ${currentPage.startsWith('services') ? 'text-primary' : 'text-white hover:text-primary'}`}
+                  >
+                    {item.label}
+                  </a>
+                  <div className="pl-6 flex flex-col space-y-3 border-l-2 border-primary/30">
+                    <a 
+                      href="#services" 
+                      onClick={(e) => handleLinkClick(e, 'services')}
+                      className={`text-2xl font-bold uppercase tracking-wider transition-colors ${currentPage === 'services' ? 'text-primary' : 'text-white/60 hover:text-primary'}`}
+                    >
+                      All Services
+                    </a>
+                    <a 
+                      href="#services/blown-in-insulation" 
+                      onClick={(e) => handleLinkClick(e, 'services/blown-in-insulation')}
+                      className={`text-2xl font-bold uppercase tracking-wider transition-colors ${currentPage === 'services/blown-in-insulation' ? 'text-primary' : 'text-white/60 hover:text-primary'}`}
+                    >
+                      Blown-In Insulation
+                    </a>
+                    <a 
+                      href="#services/attic-insulation-upgrades" 
+                      onClick={(e) => handleLinkClick(e, 'services/attic-insulation-upgrades')}
+                      className={`text-2xl font-bold uppercase tracking-wider transition-colors ${currentPage === 'services/attic-insulation-upgrades' ? 'text-primary' : 'text-white/60 hover:text-primary'}`}
+                    >
+                      Attic Insulation & Upgrades
+                    </a>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <a 
+                key={item.label}
+                href={`#${item.id}`} 
+                onClick={(e) => handleLinkClick(e, item.id)}
+                className={`text-4xl font-black italic transition-colors ${currentPage === item.id ? 'text-primary' : 'text-white hover:text-primary'}`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+          <a href="tel:6477049021" className="bg-primary text-white py-6 rounded-3xl text-center text-2xl font-black uppercase tracking-widest shrink-0">Call Now</a>
         </nav>
       </div>
     </header>

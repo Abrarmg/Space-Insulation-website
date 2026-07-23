@@ -15,8 +15,10 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import LocationMap from './components/LocationMap';
+import BlownInInsulation from './components/BlownInInsulation';
+import AtticInsulationUpgrades from './components/AtticInsulationUpgrades';
 
-export type PageID = 'home' | 'services' | 'about' | 'contact' | 'blog';
+export type PageID = 'home' | 'services' | 'services/blown-in-insulation' | 'services/attic-insulation-upgrades' | 'about' | 'contact' | 'blog';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageID>('home');
@@ -29,13 +31,13 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const initialHash = window.location.hash.replace('#', '') as PageID;
-    if (['home', 'services', 'about', 'contact', 'blog'].includes(initialHash)) {
+    if (['home', 'services', 'services/blown-in-insulation', 'services/attic-insulation-upgrades', 'about', 'contact', 'blog'].includes(initialHash)) {
       setCurrentPage(initialHash);
     }
 
     const handlePopState = () => {
       const hash = window.location.hash.replace('#', '') as PageID;
-      if (['home', 'services', 'about', 'contact', 'blog'].includes(hash)) {
+      if (['home', 'services', 'services/blown-in-insulation', 'services/attic-insulation-upgrades', 'about', 'contact', 'blog'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -46,6 +48,10 @@ const App: React.FC = () => {
 
   const renderPage = () => {
     switch (currentPage) {
+      case 'services/blown-in-insulation':
+        return <BlownInInsulation onNavigate={handleNavigate} />;
+      case 'services/attic-insulation-upgrades':
+        return <AtticInsulationUpgrades onNavigate={handleNavigate} />;
       case 'services':
         return (
           <>
